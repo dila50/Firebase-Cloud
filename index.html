@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyRnlXGzoBuilIko5Rg8Yj53xbT-U5upc",
+      authDomain: "fir-cloud-9b23b.firebaseapp.com",
+      projectId: "fir-cloud-9b23b",
+      storageBucket: "fir-cloud-9b23b.firebasestorage.app",
+      messagingSenderId: "413818297755",
+      appId: "1:413818297755:web:5ebc105007c8f941f4953e"
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    window.login = function() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          window.location.href = 'dashboard.html';
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    }
+  </script>
+</head>
+<body>
+  <div class="glass-card">
+    <h1>Login</h1>
+    <form onsubmit="event.preventDefault(); login();">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button class="btn" type="submit">Login</button>
+    </form>
+    <p class="link" onclick="window.location.href='register.html'">Belum punya akun? Daftar</p>
+  </div>
+</body>
+</html>

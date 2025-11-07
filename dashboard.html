@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard DL-Kosmetik</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyRnlXGzoBuilIko5Rg8Yj53xbT-U5upc",
+      authDomain: "fir-cloud-9b23b.firebaseapp.com",
+      projectId: "fir-cloud-9b23b",
+      storageBucket: "fir-cloud-9b23b.firebasestorage.app",
+      messagingSenderId: "413818297755",
+      appId: "1:413818297755:web:5ebc105007c8f941f4953e"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        document.getElementById("userEmail").textContent = user.email;
+      } else {
+        window.location.href = "index.html"; // redirect ke login jika belum login
+      }
+    });
+
+    window.logout = () => {
+      signOut(auth).then(() => {
+        window.location.href = "index.html";
+      });
+    };
+  </script>
+</head>
+<body>
+ <div class="dashboard-container glass-card">
+  <h1>Selamat Datang di Dashboard</h1>
+  <p>Halo, <strong><span id="userEmail">Memuat...</span></strong> 👋</p>
+  <p>Project: <strong>Cloud Computing & Security</strong></p>
+  <p>Pastikan untuk selalu menjaga keamanan akun Anda dan memeriksa update terbaru secara berkala. 🌟</p>
+  <p>Semoga hari Anda menyenangkan dan produktif! 💼✨</p>
+  <button class="btn" onclick="logout()">Logout</button>
+</div>
+</body>
+</html>
